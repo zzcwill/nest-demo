@@ -5,8 +5,13 @@ import { CreateCatDto } from './dto/create-cat.dto'
 
 import { ValidationPipe } from './validate.pipe'
 
+import { Cat } from './interfaces/cat.interface';
+
+import { CatsService } from './cats.service';
+
 @Controller('cats')
 export class CatsController {
+	constructor(private readonly catsService: CatsService) {}
 
 	@Get()
   find(): string {
@@ -34,4 +39,9 @@ export class CatsController {
 	async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
 		return createCatDto;
 	}
+
+	@Get('list')
+  async list(): Promise<Cat[]> {
+    return this.catsService.getList();
+  }
 }
