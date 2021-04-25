@@ -16,7 +16,7 @@ import { AuthGuard } from './guard/auth.guard'
 import { LoggingInterceptor } from './interceptor/logging.interceptor'
 
 
-@Controller('cats')
+@Controller('/cats')
 export class CatsController {
 	constructor(private readonly catsService: CatsService) {}
 
@@ -25,17 +25,17 @@ export class CatsController {
     return 'this is cats';
   }
 
-	@Get('index')
+	@Get('/index')
 	@Redirect('/cats')
 
-	@Get('user')
+	@Get('/user')
   find2(@Req() request: Request): object {
     return {
 			username: request.query.user
 		};
   }
 
-	@Get('yb')
+	@Get('/yb')
 	async find3(): Promise<any[]> {
 		return [{
 			name: 'zzc'
@@ -52,7 +52,7 @@ export class CatsController {
 		return name;
 	}
 
-	@Get('list')
+	@Get('/list')
   async list(): Promise<Cat[]> {
     return this.catsService.getList();
   }
@@ -63,7 +63,7 @@ export class CatsController {
 		return token;
 	}
 
-	@Post('inter')
+	@Post('/inter')
 	@UseInterceptors(LoggingInterceptor)
 	async inter(@Body() body) {
 		console.info(2)

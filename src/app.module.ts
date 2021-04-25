@@ -10,11 +10,10 @@ import { ApiController } from './api/api.controller';
 
 import { AppController } from './app.controller';
 
-import { User } from './entity/user.entity';
-
 import { ConfigService } from './config/config.service';
 import { ConfigModule } from './config/config.module';
 import { RedisModule } from './redis/redis.module';
+
 
 
 @Module({
@@ -33,17 +32,7 @@ import { RedisModule } from './redis/redis.module';
             return configService;
         },
         inject: [ ConfigService ],
-    }),    
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: '127.0.0.1',
-    //   port: 3306,
-    //   username: 'root',
-    //   password: 'root',
-    //   database: 'shop',
-    //   entities: [User],
-    //   synchronize: false,
-    // }),
+    }),
     UserModule,
     CatsModule
   ],
@@ -52,7 +41,6 @@ import { RedisModule } from './redis/redis.module';
 export class AppModule implements NestModule {
   constructor(
     private readonly configService: ConfigService,
-    private readonly connection: Connection
   ) {}
 
   configure(consumer: MiddlewareConsumer) {
