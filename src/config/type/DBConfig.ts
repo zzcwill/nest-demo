@@ -3,7 +3,7 @@ import { Logger } from 'typeorm/logger/Logger';
 import { LoggerOptions } from 'typeorm/logger/LoggerOptions';
 
 export default class DBConfig extends BaseConfig {
-    readonly type: 'mysql' | 'mariadb';
+    readonly type: 'mysql';
     readonly host: string;
     readonly port: number;
     readonly username: string;

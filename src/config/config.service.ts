@@ -6,7 +6,6 @@ import productionJSON from './cfg.production';
 import DBConfig from './type/DBConfig';
 
 import { ServerConfig } from './type/ServerConfig';
-import StaticConfig from './type/StaticConfig';
 import RedisConfig from './type/RedisConfig';
 
 export class ConfigService {
@@ -18,7 +17,6 @@ export class ConfigService {
     readonly db: DBConfig;
     readonly redis: RedisConfig;
     readonly server: ServerConfig;
-    readonly static: StaticConfig;
 
     constructor() {
         const envConfigMap = {
@@ -38,6 +36,5 @@ export class ConfigService {
         }
         this.redis = new RedisConfig(defaultJSON.redis);
         this.server = new ServerConfig(defaultJSON.server);
-        this.static = new StaticConfig(defaultJSON.static);
     }
 }

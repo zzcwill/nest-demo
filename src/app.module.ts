@@ -6,7 +6,6 @@ import { CatsModule } from './cats/cats.module';
 import { UserModule } from './user/user.module';
 
 import { LoggerMiddleware } from './middleware/logger.middleware';
-import { ApiController } from './api/api.controller';
 
 import { AppController } from './app.controller';
 
@@ -36,7 +35,7 @@ import { RedisModule } from './redis/redis.module';
     UserModule,
     CatsModule
   ],
-  controllers: [AppController,ApiController]
+  controllers: [AppController]
 })
 export class AppModule implements NestModule {
   constructor(

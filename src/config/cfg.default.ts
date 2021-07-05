@@ -16,7 +16,7 @@ export default {
         charset: 'utf8',
         username: 'root',
         password: 'root',
-        database: 'shop',
+        database: 'nest_demo',
         synchronize: false,
         entities: [path.join(__dirname, '../entity/**/*.entity{.ts,.js}')],
         logging: 'all', // query, error, schema, warn, info, log, all
@@ -26,7 +26,7 @@ export default {
     redis: {
         host: '127.0.0.1',
         port: 6379,
-        // keyPrefix: 'mili:',
+        keyPrefix: 'nest:',
         family: 4, // 4 (IPv4) or 6 (IPv6)
         password: 'root',
         db: 0,
