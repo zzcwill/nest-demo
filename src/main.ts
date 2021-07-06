@@ -9,11 +9,14 @@ import { ConfigService } from './config/config.service';
 
 import bootstrap from './bootstrap';
 
-
 async function main() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
     const configService: ConfigService = app.get(ConfigService);
+
+    app.useStaticAssets('public');
+    app.setBaseViewsDir('views');
+    app.setViewEngine('ejs');
 
     await bootstrap(app);
 
@@ -28,10 +31,12 @@ async function main() {
         .build();
       const document = SwaggerModule.createDocument(app, options);
       SwaggerModule.setup('doc', app, document);
-    }   
+    }
+
+    await app.listen(configService.server.port);
 
     console.info(chalk.green(`app run in ${process.env.NODE_ENV}`));
-    console.info(chalk.green(`http://${getIPAdress()}:${configService.server.port}`));    
+    console.info(chalk.green(`http://${getIPAdress()}:${configService.server.port}`));
 }
 
 main();

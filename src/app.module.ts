@@ -47,9 +47,10 @@ export class AppModule implements NestModule {
   consumer
       .apply(...middlewares)
       .exclude(
-        { path: 'doc', method: RequestMethod.GET },
-        { path: 'doc', method: RequestMethod.POST },
+        // { path: 'doc', method: RequestMethod.GET },
+        // { path: 'doc', method: RequestMethod.POST },
         'doc/(.*)',
+        'user/test',
       )
       .forRoutes({ path: '*', method: RequestMethod.ALL });
   }

@@ -32,17 +32,22 @@ export class UserController {
   }
 
   @Get('/to')
-	@Redirect('/login')
+  @Redirect('/user/test')
+  async toUrl() {
+  }  
 
 	@Post('/login')
   @ApiBody({
     description: '用户登录',
     type: LoginDTO,
   })  
-  async login(@Body('id') id) {
-		let data = await this.userService.login(id);
-    return data;
-  }	
+  async login(@Body() loginParmas: LoginDTO) {
+    const data = await this.userService.login(loginParmas.username, loginParmas.password);
+    return {
+      code: 200,
+      data: data
+    }
+  } 
 
 	@Get('/test')
   // @UseGuards(AuthGuard)

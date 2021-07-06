@@ -35,8 +35,8 @@ export class UserService {
     await this.usersRepository.delete(id);
   }
 
-  async login(id: string): Promise<User> {
-    let uid = id;
+  async login(username: string, password: string): Promise<User> {
+    let uid = 1;
     let user = await this.usersRepository.findOne(uid);
     await this.redisService.setUser(user);
     return user;
