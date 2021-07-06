@@ -7,6 +7,15 @@ import { ClientProxy } from '@nestjs/microservices';
 import { Message } from './message.event';
 import { RABBITMQ_QUEUE_NAME, RABBITMQ_URL, RABBIT_TEST_PATTERN } from './constants';
 
+
+import { AuthGuard } from '../guard/auth.guard'
+
+// import { LoginDTO, RegisterInfoDTO } from './user.dto';
+import { LoginDTO } from './user.dto';
+import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+
+@ApiBearerAuth()
+@ApiTags('user')
 @Controller('/user')
 export class UserController {
 	constructor(
@@ -22,13 +31,22 @@ export class UserController {
     return data;
   }
 
+  @Get('/to')
+	@Redirect('/login')
+
 	@Post('/login')
+  @ApiBody({
+    description: '用户登录',
+    type: LoginDTO,
+  })  
   async login(@Body('id') id) {
 		let data = await this.userService.login(id);
     return data;
   }	
 
 	@Get('/test')
+  // @UseGuards(AuthGuard)
+  // @UseInterceptors(LoggingInterceptor)
   @Render('test')
   async page() {
     return { title: 'test' }

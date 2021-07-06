@@ -1,13 +1,5 @@
 import * as path from 'path';
 
-const domain = '127.0.0.1';
-const port = 3000;
-const url = `http://${domain}`;
-const mDomain = '127.0.0.1';
-const mURL = `http://${mDomain}`;
-
-const staticURL = `http://${domain}`;
-
 export default {
     db: {
         type: 'mysql',
@@ -16,7 +8,7 @@ export default {
         charset: 'utf8',
         username: 'root',
         password: 'root',
-        database: 'nest_demo',
+        database: 'nest_shop',
         synchronize: false,
         entities: [path.join(__dirname, '../entity/**/*.entity{.ts,.js}')],
         logging: 'all', // query, error, schema, warn, info, log, all
@@ -31,38 +23,9 @@ export default {
         password: 'root',
         db: 0,
     },
-    static: {
-        staticURL,
-        cssPath: `${staticURL}/styles`,
-        jsPath: `${staticURL}/js`,
-        imgPath: `${staticURL}/images`,
-        fontPath: `${staticURL}/fonts`,
-        uploadImgURL: '',
-        imgFormat: ['jpg', 'jpeg', 'png'],
-        imgMaxSize: 3 * 1024 * 1024,
-        imgMaxSizeError: '图片大小不能超过%sM',
-        userLevelChapterURL: 'https://www.golang123.com/books/90/chapters/1515', // 用户等级在《如何使用米粒社区》中的章节url
-    },
     server: {
-        siteName: '米粒',
-        companyName: '北京xxxxxxx有限公司',
-        icp: '京ICP备12345678号',
-        url,
-        mURL,
-        domain,
-        mDomain,
-        allowOrigins: [],
-        port,
-        apiPrefix: '/api/v1',
-        passSalt: 'u5o2law8xi',
-        tokenName: 'token',
-        tokenSecret: 'ema21ioirJikXIkLCJugmeiv',
-        tokenMaxAge: 7 * 24 * 60 * 60 * 1000, // token多久过期，单位毫秒
-        cookieSecret: 'aiwyskgun7cwimjq',
-        rateLimitWindowMs: 15 * 60 * 1000, // 时间窗口，单位毫秒
-        rateLimitMax: 1000, // limit each IP to rateLimitMax requests per windowMs
-        swaggerPrefix: 'api/v1',
-        xiaoceEmail: 'xiaoce@abc.com',
+        domain: '127.0.0.1',
+        port: 3000
     },
     aliyunOSS: {
         accessKeyID: '',

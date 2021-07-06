@@ -2,7 +2,6 @@ import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/c
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 
-import { CatsModule } from './cats/cats.module';
 import { UserModule } from './user/user.module';
 
 import { LoggerMiddleware } from './middleware/logger.middleware';
@@ -16,8 +15,8 @@ import { RedisModule } from './redis/redis.module';
 
 
 @Module({
-  imports: [
-    ConfigModule,
+  imports: [    
+    ConfigModule,  
     TypeOrmModule.forRootAsync({
         useFactory: async (configService: ConfigService) => {
             // typeorm bug, https://github.com/nestjs/nest/issues/1119
@@ -32,8 +31,7 @@ import { RedisModule } from './redis/redis.module';
         },
         inject: [ ConfigService ],
     }),
-    UserModule,
-    CatsModule
+    UserModule
   ],
   controllers: [AppController]
 })
@@ -49,9 +47,9 @@ export class AppModule implements NestModule {
   consumer
       .apply(...middlewares)
       .exclude(
-        { path: 'cats', method: RequestMethod.GET },
-        { path: 'cats', method: RequestMethod.POST },
-        'cats/(.*)',
+        { path: 'doc', method: RequestMethod.GET },
+        { path: 'doc', method: RequestMethod.POST },
+        'doc/(.*)',
       )
       .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
