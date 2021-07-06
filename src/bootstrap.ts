@@ -6,8 +6,8 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { AllExceptionsFilter } from './filters/any-exception.filter';
 
 export default async function bootstrap(app) {
-  app.use(express.json()); // For parsing application/json
-  app.use(express.urlencoded({ extended: false })); // For parsing application/x-www-form-urlencoded
+  // app.use(express.json()); // For parsing application/json
+  // app.use(express.urlencoded({ extended: false })); // For parsing application/x-www-form-urlencoded
 
   // 监听所有的请求路由，并打印日志
   // app.use(logger);
