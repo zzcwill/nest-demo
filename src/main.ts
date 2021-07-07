@@ -18,6 +18,9 @@ async function main() {
     app.setBaseViewsDir('views');
     app.setViewEngine('ejs');
 
+    // 开启CORS
+    // app.enableCors();
+
     await bootstrap(app);
 
     if(process.env.NODE_ENV !== 'production') {
