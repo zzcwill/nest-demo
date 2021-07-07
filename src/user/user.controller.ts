@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res, Redirect, Post, Body, HttpCode, Header, UseGuards, UsePipes, UseInterceptors, Render, Inject } from '@nestjs/common';
+import { Controller, Get, Req, Res, Redirect, Post, Body, HttpCode, Header, UseGuards, UsePipes, UseInterceptors, Render, Inject, SetMetadata } from '@nestjs/common';
 import { Request } from 'express';
 
 import { UserService } from './user.service';
@@ -14,6 +14,8 @@ import { ValidationPipe } from '../pipe/validation.pipe';
 // import { LoginDTO, RegisterInfoDTO } from './user.dto';
 import { LoginDTO } from './user.dto';
 import { ApiTags, ApiBearerAuth, ApiBody, ApiResponse } from '@nestjs/swagger';
+
+import { Roles } from '../decorator/roles.decorator'
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -38,6 +40,8 @@ export class UserController {
   async toUrl() {
   }
 
+  // @SetMetadata('roles', ['admin'])
+  @Roles('admin')
   @Post('/login')
   @ApiBody({
     description: '用户登录',

@@ -1,12 +1,14 @@
 import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
 import { Observable } from 'rxjs';
+import { Reflector } from '@nestjs/core';
 
 import { RedisService } from '../redis/redis.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    private readonly redisService: RedisService
+    private readonly reflector: Reflector,
+    private readonly redisService: RedisService,
   ) {}
 
   canActivate(
@@ -14,12 +16,15 @@ export class AuthGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();
 
-		let user: any= {
-			uid: 2,
-			username: 'root'
-		}
-		this.redisService.setUser(user)
-		request.user = user
+    const roles = this.reflector.get<string[]>('roles', context.getHandler());
+    console.info(roles)
+
+		// let user: any= {
+		// 	uid: 2,
+		// 	username: 'root'
+		// }
+		// this.redisService.setUser(user)
+		// request.user = user
 
 		// if(!request.body.token) {
 		// 	throw new ForbiddenException();
