@@ -27,8 +27,13 @@ export class UserService {
     return firstUser;
   }
 
-  findOne(id: string): Promise<User> {
-    return this.usersRepository.findOne(id);
+  async findOne(id: string): Promise<User> {
+    let user: User = await this.usersRepository.query(
+      `
+       SELECT * FROM user
+      `)
+    return user
+    // return this.usersRepository.findOne(id);
   }
 
   async remove(id: string): Promise<void> {
